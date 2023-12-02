@@ -20,14 +20,15 @@ func main() {
 	scanner := bufio.NewScanner(file)
 
 	id_sum := 0
+	min_sum := 0
 
 	for scanner.Scan() {
 		id, colors := game_parser(scanner.Text())
 
-		fmt.Printf("%d: ", id)
-		for k, v := range colors {
-			fmt.Printf("%s: %d, ", k, v)
-		}
+		// fmt.Printf("%d: ", id)
+		// for k, v := range colors {
+		// 	fmt.Printf("%s: %d, ", k, v)
+		// }
 
 		// This is for part 1
 		//   12 red
@@ -37,10 +38,19 @@ func main() {
 			id_sum += id
 		}
 
-		fmt.Println()
+		// Part 2
+		line := 1
+		for _, v := range colors {
+			line *= v
+		}
+		min_sum += line
+
+		// fmt.Println()
 	}
 
+
 	fmt.Println(id_sum)
+	fmt.Println(min_sum)
 }
 
 func game_parser(line string) (int, map[string]int) {
